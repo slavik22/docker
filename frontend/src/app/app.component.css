@@ -1,0 +1,18 @@
+.app-container {
+    display: flex;
+    flex-direction: row; /* Change to column for a vertical layout */
+    align-items: stretch;
+    justify-content: space-around;
+    height: 100vh; /* Full viewport height */
+  }
+  
+  .app-controls {
+    flex: 1;
+    padding: 10px;
+    border-right: 2px solid #ddd; /* Only if using row direction */
+  }
+  
+  .app-terminal {
+    flex: 2;
+    padding: 10px;
+  }
