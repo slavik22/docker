@@ -1,59 +1,233 @@
-<!-- src/app/tutorial/tutorial.component.html -->
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-12">
-        <h1 class="display-4">Docker 101 Tutorial</h1>
-        <p class="lead">A quick guide to the basic Docker commands.</p>
+    <div class="accordion" id="dockerTutorialAccordion">
+      <div class="card">
+        <div class="card-header" id="headingIntro">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseIntro" aria-expanded="true" aria-controls="collapseIntro">
+              Introduction to Docker
+            </button>
+          </h2>
+        </div>
+        <div id="collapseIntro" class="collapse show" aria-labelledby="headingIntro" data-parent="#dockerTutorialAccordion">
+          <div class="card-body">
+            Docker is a platform for developers and sysadmins to develop, deploy, and run applications with containers. The use of Linux containers to deploy applications is called containerization. Containers are not new, but their use for easily deploying applications is. <br>
+            Docker is popular because of the following:
+            <ol>
+                <li>Portability.</li>
+                <li>Reproducibility.</li>
+                <li>Efficiency.</li>
+                <li>Efficiency.</li>
+            </ol>
+            
+            <h5>How docker works</h5>
+            Docker makes use of a client-server architecture. The Docker client talks with the docker daemon which helps in building, running, and distributing the docker containers. The Docker client runs with the daemon on the same system or we can connect the Docker client with the Docker daemon remotely. With the help of REST API over a UNIX socket or a network, the docker client and daemon interact with each other.
+
+            <h5>Docker engine</h5>
+            The software that hosts the containers is named Docker Engine. Docker Engine is a client-server based application. The docker engine has 3 main components:
+
+            <ol>
+                <li><strong>Server:</strong> It is responsible for creating and managing Docker images, containers, networks, and volumes on the Docker. It is referred to as a daemon process</li>
+                <li><strong>REST API:</strong> It specifies how the applications can interact with the Server and instructs it what to do.</li>
+                <li><strong>Client:</strong> The Client is a docker command-line interface (CLI), that allows us to interact with Docker using the docker commands.</li>
+            </ol>
+            <h5>Why use Docker</h5>
+            Docker can be used to pack the application and its dependencies which makes it lightweight and easy to ship the code faster with more reliability. Docker make its very simple to run the application in the production environment docker container can be platform independent if the docker engine is installed in the machine.
+          </div>
+          
+        </div>
+      </div>
   
-        <div class="accordion" id="dockerTutorialAccordion">
-          <!-- Introduction to Docker -->
-          <div class="card">
-            <div class="card-header" id="headingOne">
-              <h2 class="mb-0">
-                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Introduction to Docker
-                </button>
-              </h2>
-            </div>
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#dockerTutorialAccordion">
-              <div class="card-body">
-                Understand Docker concepts and the Docker architecture.
-              </div>
-            </div>
+      <div class="card">
+        <div class="card-header" id="headingCommands">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseCommands" aria-expanded="false" aria-controls="collapseCommands">
+              Common Docker Commands
+            </button>
+          </h2>
+        </div>
+        <div id="collapseCommands" class="collapse" aria-labelledby="headingCommands" data-parent="#dockerTutorialAccordion">
+          <div class="card-body">
+
+            <h5>Docker Version</h5>
+            <code>docker --version</code> - Display the Docker version installed.
+            <h5>Docker Help</h5>
+            <code>docker --help</code> or <code>docker COMMAND --help</code> - Get help on a specific command.
+            
+            <h5>Docker Run command</h5>
+            This command is used to run a container from an image. The docker run command is a combination of the docker create and docker start commands. It creates a new container from the image specified and starts that container. if the docker image is not present, then the docker run pulls that. <br>
+            <code>docker run image_name </code>
+
+            <h5>Docker Pull</h5>
+            This command allows you to pull any image which is present in the official registry of docker, Docker hub. By default, it pulls the latest image, but you can also mention the version of the image. <br> 
+            <code>docker pull image_name</code>
+
+            <h5>Docker PS</h5>
+            This command (by default) shows us a list of all the running containers. We can use various flags with it.
+            <ol>
+                <li><strong>-a flag: </strong>shows us all the containers, stopped or running.</li>
+                <li><strong>-l flag:</strong> shows us the latest container.</li>
+                <li><strong>-q flag:</strong> shows only the Id of the containers.</li>
+            </ol>
+            <code>docker ps [options..]</code>
+            
+            <h5>Docker Stop</h5>
+            This command allows you to stop a container if it has crashed or you want to switch to another one.
+            <br><code>docker stop container_ID</code>
+
+            <h5>Docker Start</h5>
+            Suppose you want to start the stopped container again, you can do it with the help of this command.
+            <br><code>docker start container_ID</code>
+
+            <h5>Docker Images</h5>
+            Lists all the pulled images which are present in our system. <br>
+            <code>docker images</code>
+            
+            <h5>Docker exec</h5>
+            This command allows us to run new commands in a running container. This command only works until the container is running, after the container restarts, this command does not restart.
+            <br>Some important flags:
+            
+            <ol>
+                <li><strong>-d flag: </strong>for running the commands in the background.</li>
+                <li><strong>-i flag:</strong> it will keep STDIN open even when not attached.</li>
+                <li><strong>-e flag:</strong> sets the environment variables</li>
+            </ol>
+            <code>docker exec options</code>
           </div>
-          <!-- Installing Docker -->
-          <div class="card">
-            <div class="card-header" id="headingTwo">
-              <h2 class="mb-0">
-                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Installing Docker
-                </button>
-              </h2>
-            </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#dockerTutorialAccordion">
-              <div class="card-body">
-                Steps to install Docker on various platforms.
-                <a href="https://docs.docker.com/get-docker/" target="_blank">Docker Installation Guide</a>
-              </div>
-            </div>
-          </div>
-          <!-- Running Your First Container -->
-          <div class="card">
-            <div class="card-header" id="headingThree">
-              <h2 class="mb-0">
-                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  Running Your First Container
-                </button>
-              </h2>
-            </div>
-            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#dockerTutorialAccordion">
-              <div class="card-body">
-                <code>docker run hello-world</code>
-              </div>
-            </div>
+        </div>
+      </div>
+  
+      <div class="card">
+        <div class="card-header" id="headingMore">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseMore" aria-expanded="false" aria-controls="collapseMore">
+              Docker Images
+            </button>
+          </h2>
+        </div>
+        <div id="collapseMore" class="collapse" aria-labelledby="headingMore" data-parent="#dockerTutorialAccordion">
+          <div class="card-body">
+            <h5>What is an Image?</h5>
+            Docker Image is an executable package of software that includes everything needed to run an application. This image informs how a container should instantiate, determining which software components will run and how. Docker Container is a virtual environment that bundles application code with all the dependencies required to run the application. The application runs quickly and reliably from one computing environment to another.
+            
+            <h5>What is Docker Hub?</h5>
+            Docker Hub is a repository service and it is a cloud-based service where people push their Docker Container Images and also pull the Docker Container Images from the Docker Hub anytime or anywhere via the internet. Generally it makes it easy to find and reuse images. It provides features such as you can push your images as private or public registry where you can store and share Docker images
+            
+            <h5>Docker Image Prune</h5>
+            Docker image prune is a command used in the docker host to remove the images that are not used or Docker image prune command is used to remove the unused docker images
+            <br><code>docker image prune</code><br>
+            All the unused images are also know as dangling images which re not associated with any containers
+
+            <h5>Docker Image Build</h5>
+            Following is the command which is used to build the docker image.<br>
+            <code>docker build -t your_image_name:tag -f path/to/Dockerfile .</code>
+            <ol>
+                <li><strong>Docker build: </strong>for running the commands in the background.</li>
+                <li><strong>-t your_image_name:tag:</strong> Gives the image you are creating a name and, if desired, a tag.</li>
+                <li><strong>path/to/Dockerfile . : </strong> Gives the location of the Dockerfile. Give the right path if it’s not in the current directory. “(.) DOT” represents the current wordir.
+                </li>
+            </ol>
+            
+            <h5>Uses of Docker Images</h5>
+            <ol>
+                <li>We can easily and effectively run the containers with the aid of docker images.</li>
+                <li>All the code, configuration settings, environmental variables, libraries, and runtime are included in a Docker image.</li>
+                <li>Docker images are platform-independent.</li>
+                <li>Layers are the building blocks of an image. </li>
+                <li>When using the build command, the user has the option of completely starting from scratch or using an existing image for the first layer</li>
+            </ol>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="card">
+        <div class="card-header" id="headingMore">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseContainers" aria-expanded="false" aria-controls="collapseMore">
+              Docker Containers
+            </button>
+          </h2>
+        </div>
+        <div id="collapseContainers" class="collapse" aria-labelledby="headingMore" data-parent="#dockerTutorialAccordion">
+          <div class="card-body">
+            Docker is the containerization platform that is used to package your application and all its dependencies together in the form of containers to make sure that your application works seamlessly in any environment which can be developed or tested or in production. Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. 
+            
+            <br><br><h5>Containerization</h5>
+            Containerization is OS-based virtualization that creates multiple virtual units in the userspace, known as Containers. Containers share the same host kernel but are isolated from each other through private namespaces and resource control mechanisms at the OS level. Container-based Virtualization provides a different level of abstraction in terms of virtualization and isolation when compared with hypervisors. Hypervisors use a lot of hardware which results in overhead in terms of virtualizing hardware and virtual device drivers. A full operating system (e.g -Linux, Windows) runs on top of this virtualized hardware in each virtual machine instance. 
+            <br><br>But in contrast, containers implement isolation of processes at the operating system level, thus avoiding such overhead. These containers run on top of the same shared operating system kernel of the underlying host machine and one or more processes can be run within each container. In containers you don’t have to pre-allocate any RAM, it is allocated dynamically during the creation of containers while in VMs you need to first pre-allocate the memory and then create the virtual machine. Containerization has better resource utilization compared to VMs and a short boot-up process. It is the next evolution in virtualization. 
+            <br><br>Containers can run virtually anywhere, greatly easy development and deployment: on Linux, Windows, and Mac operating systems; on virtual machines or bare metal, on a developer’s machine or in data centers on-premises; and of course, in the public cloud. Containers virtualize CPU, memory, storage, and network resources at the OS level, providing developers with a sandboxed view of the OS logically isolated from other applications. Docker is the most popular open-source container format available and is supported on Google Cloud Platform and by Google Kubernetes Engine. 
+
+            <br><br><h5>Run Hello-World Container</h5>
+            <code>docker run hello-world</code> - Pulls the Hello-World image and runs it in a container.
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header" id="headingMore">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseCompose" aria-expanded="false" aria-controls="collapseMore">
+              Docker Compose
+            </button>
+          </h2>
+        </div>
+        <div id="collapseCompose" class="collapse" aria-labelledby="headingMore" data-parent="#dockerTutorialAccordion">
+          <div class="card-body">
+            Docker is the containerization platform that is used to package your application and all its dependencies together in the form of containers to make sure that your application works seamlessly in any environment which can be developed or tested or in production. Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. 
+            
+            <br><br><h5>What is Docker Compose</h5>
+            Docker Compose will execute a YAML-based multi-container application. The YAML file consists of all configurations needed to deploy containers Docker Compose, which is integrated with Docker Swarm, and provides directions for building and deploying containers. With Docker Compose, each container is constructed to run on a single host.
+
+
+            <br><br><h5>Docker Container.</h5> 
+            <br> docker container is a lightweight Linux-based system that packages all the libraries and dependencies of an application, prebuilt and ready to be executed. It is an isolated running image that makes the application feel like the whole system is dedicated to it. Many large organizations are moving towards containers from VMs as they are light and simple to use and maintain. But when it comes to using containers for real-world applications, usually one container is not sufficient. For example, Let us assume Netflix uses a microservices architecture. Then it needs services for authentication, Login, Database, Payment, etc, and for each of these services, we want to run a separate container.
+            It is preferred for a container to have only a single purpose.<br>
+            Now, imagine writing separate docker files, and managing configuration and networks for each container. This is where Docker Compose comes into the picture and makes our lives easy.
+
+            <br><br><h5>Why Docker Compose?</h5>
+           
+            As discussed earlier,  a real-world application has a separate container for each of its services. And we know that each container needs to have a Dockerfile. It means we will have to write maybe hundreds of docker files and then manage everything about the containers individually, That is cumbersome. 
+            <br>
+            Hence we use docker-compose, which is a tool that helps in the definition and running of multi-container applications. With the help of Docker Compose you can start and stop the services by using its YAML file.
+            <br>
+            Docker-compose allows us to start and stop all of the services with just a few simple commands and a single YAML file for each configuration
+            <br>
+            In contrast to utilizing a prebuilt image from Docker Hub, which you may configure with the docker-compose.yaml file, if you are using a custom image, you will need to declare its configurations in a separate Dockerfile.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header" id="headingMore">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseNetwork" aria-expanded="false" aria-controls="collapseMore">
+              Docker Networking
+            </button>
+          </h2>
+        </div>
+        <div id="collapseNetwork" class="collapse" aria-labelledby="headingMore" data-parent="#dockerTutorialAccordion">
+          <div class="card-body">
+            Docker Networking allows you to create a Network of Docker Containers managed by a master node called the manager. Containers inside the Docker Network can talk to each other by sharing packets of information. In this article, we will discuss some basic commands that would help you get started with Docker Networking.
+
+            <h5>Docker Networking</h5>
+            A network is a group of two or more devices that can communicate with each other either physically or virtually. The Docker network is a virtual network created by Docker to enable communication between Docker containers. If two containers are running on the same host they can communicate with each other without the need for ports to be exposed to the host machine. You may use Docker to manage your Docker hosts in any platform manner, regardless of whether they run Windows, Linux, or a combination of the two.
+
+            <h5>Network Drivers</h5>
+            There are several default network drivers available in Docker and some can be installed with the help of plugins, Command to see the list of containers in Docker mentioned below.
+
+            <br><code>docker network ls</code><br>
+            Types of Network Drivers
+            <ol>
+                <li><strong>bridge: </strong>If you build a container without specifying the kind of driver, the container will only be created in the bridge network, which is the default network. </li>
+                <li><strong>host:</strong> Containers will not have any IP address they will be directly created in the system network which will remove isolation between the docker host and containers. </li>
+                <li><strong>none: </strong>IP addresses will not be assigned to containers. These containments are not accessible to us from the outside or from any other container.</li>
+                <li><strong>overlay: </strong> overlay network will enable the connection between multiple Docker demons and make different Docker swarm services communicate with each other.</li>
+                <li><strong>ipvlan: </strong> Users have complete control over both IPv4 and IPv6 addressing by using the IPvlan driver.</li>
+                <li><strong>macvlan: </strong> macvlan driver makes it possible to assign MAC addresses to a container.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
   </div>
   
