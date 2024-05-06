@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgTerminalModule } from 'ng-terminal';
 import { TerminalComponent } from './terminal/terminal.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TerminalComponent,
+    TutorialComponent,
   ],
   imports: [
     BrowserModule,

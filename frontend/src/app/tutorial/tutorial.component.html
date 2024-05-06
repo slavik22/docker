@@ -1,0 +1,59 @@
+<!-- src/app/tutorial/tutorial.component.html -->
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="display-4">Docker 101 Tutorial</h1>
+        <p class="lead">A quick guide to the basic Docker commands.</p>
+  
+        <div class="accordion" id="dockerTutorialAccordion">
+          <!-- Introduction to Docker -->
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Introduction to Docker
+                </button>
+              </h2>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#dockerTutorialAccordion">
+              <div class="card-body">
+                Understand Docker concepts and the Docker architecture.
+              </div>
+            </div>
+          </div>
+          <!-- Installing Docker -->
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Installing Docker
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#dockerTutorialAccordion">
+              <div class="card-body">
+                Steps to install Docker on various platforms.
+                <a href="https://docs.docker.com/get-docker/" target="_blank">Docker Installation Guide</a>
+              </div>
+            </div>
+          </div>
+          <!-- Running Your First Container -->
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Running Your First Container
+                </button>
+              </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#dockerTutorialAccordion">
+              <div class="card-body">
+                <code>docker run hello-world</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
