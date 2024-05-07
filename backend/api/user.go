@@ -26,7 +26,7 @@ func (server *Server) registerUser(ctx *gin.Context) {
 	var requestData createUserRequest
 
 	if err := ctx.ShouldBindJSON(&requestData); err != nil {
-		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		ctx.JSON(http.StatusBadRequest, "Invalid data")
 		return
 	}
 
