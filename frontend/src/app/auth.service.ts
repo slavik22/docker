@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 export class AuthService {
   private baseUrl = 'http://localhost:8080/';
 
+  private user: any;
+
   constructor(private http: HttpClient, private router: Router) { }
 
   register(data:any){
@@ -20,13 +22,30 @@ export class AuthService {
     localStorage.clear();
     this.router.navigate(["login"]);
   }
-  storeToken(tokenValue: string){
-    localStorage.setItem("token", tokenValue);
+  storeToken(tokenValue: any){
+    this.user = tokenValue.user;
+    localStorage.setItem("token", tokenValue.access_token);
+    localStorage.setItem("id", this.user.id);
+    localStorage.setItem("signed", "true");
+
+    console.log(this.user);
   }
   getToken(){
     return localStorage.getItem("token");
   }
   isLoggedIn():boolean{
-    return !!localStorage.getItem("token");
+    return localStorage.getItem("signed") !== null;
+  }
+  isAdmin():boolean{
+    return this.user.is_admin.Bool;
+  }
+
+  getUserId():number{
+    const a = localStorage.getItem("id");
+
+    if(a === null){
+      return 0;
+    }
+    return +a;
   }
 }

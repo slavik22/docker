@@ -41,7 +41,13 @@ func (server *Server) setupRouter() {
 	router.POST("/users/register", server.registerUser)
 	router.POST("/users/login", server.loginUser)
 
-	//authRoutes := router.Group("/").Use(authMiddleware(server.jwtMaker))
+	router.GET("/tutorials", server.listTutorials)
+	router.GET("/tutorials/user/:id", server.listUserTutorials)
+	router.POST("/tutorials", server.createTutorial)
+	router.PUT("/tutorials/:id", server.updateTutorial)
+	router.GET("/tutorials/:id", server.getTutorial)
+	router.DELETE("/tutorials/:id", server.deleteTutorial)
+
 	router.GET("/ws", handleWebSocket)
 
 	server.router = router

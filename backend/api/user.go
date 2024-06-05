@@ -11,15 +11,16 @@ import (
 )
 
 type createUserRequest struct {
-	Name     string `json:"name" binding:"required,alphanum"`
-	Password string `json:"password" binding:"required,min=6"`
+	Name     string `json:"name" binding:"required"`
+	Password string `json:"password" binding:"required"`
 	Email    string `json:"email" binding:"required,email"`
 }
 
 type userResponse struct {
-	Id    int32  `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
+	Id      int32        `json:"id"`
+	Name    string       `json:"name"`
+	Email   string       `json:"email"`
+	IsAdmin sql.NullBool `json:"is_admin"`
 }
 
 func (server *Server) registerUser(ctx *gin.Context) {
@@ -52,9 +53,10 @@ func (server *Server) registerUser(ctx *gin.Context) {
 	}
 
 	userResp := userResponse{
-		Id:    account.ID,
-		Name:  account.Name,
-		Email: account.Email,
+		Id:      account.ID,
+		Name:    account.Name,
+		Email:   account.Email,
+		IsAdmin: account.IsAdmin,
 	}
 
 	ctx.JSON(http.StatusCreated, userResp)
@@ -62,7 +64,7 @@ func (server *Server) registerUser(ctx *gin.Context) {
 
 type loginUserRequest struct {
 	Email    string `json:"email" binding:"required"`
-	Password string `json:"password" binding:"required,min=6"`
+	Password string `json:"password" binding:"required"`
 }
 
 type loginUserResponse struct {
@@ -72,9 +74,10 @@ type loginUserResponse struct {
 
 func newUserResponse(user db.User) userResponse {
 	return userResponse{
-		Id:    user.ID,
-		Name:  user.Name,
-		Email: user.Email,
+		Id:      user.ID,
+		Name:    user.Name,
+		Email:   user.Email,
+		IsAdmin: user.IsAdmin,
 	}
 }
 

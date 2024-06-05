@@ -25,7 +25,9 @@ export class LoginComponent {
       this.authService.login(this.loginForm.value).subscribe({
         next: res => {
           this.loginForm.reset();
-          this.authService.storeToken(res.token);
+          console.log(res)
+          this.authService.storeToken(res);
+
           this.router.navigate(['']);
         },
         error: error => {

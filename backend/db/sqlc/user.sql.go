@@ -7,36 +7,45 @@ package db
 
 import (
 	"context"
+	"database/sql"
 )
 
 const createUser = `-- name: CreateUser :one
 INSERT INTO "user" (
     hashed_password,
     email,
-    name
-) VALUES ($1, $2, $3) RETURNING id, email, hashed_password, name
+    name,
+    is_admin
+) VALUES ($1, $2, $3, $4) RETURNING id, email, hashed_password, name, is_admin
 `
 
 type CreateUserParams struct {
-	HashedPassword string `json:"hashed_password"`
-	Email          string `json:"email"`
-	Name           string `json:"name"`
+	HashedPassword string       `json:"hashed_password"`
+	Email          string       `json:"email"`
+	Name           string       `json:"name"`
+	IsAdmin        sql.NullBool `json:"is_admin"`
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
-	row := q.db.QueryRowContext(ctx, createUser, arg.HashedPassword, arg.Email, arg.Name)
+	row := q.db.QueryRowContext(ctx, createUser,
+		arg.HashedPassword,
+		arg.Email,
+		arg.Name,
+		arg.IsAdmin,
+	)
 	var i User
 	err := row.Scan(
 		&i.ID,
 		&i.Email,
 		&i.HashedPassword,
 		&i.Name,
+		&i.IsAdmin,
 	)
 	return i, err
 }
 
 const getUserByEmail = `-- name: GetUserByEmail :one
-SELECT id, email, hashed_password, name FROM "user"
+SELECT id, email, hashed_password, name, is_admin FROM "user"
 WHERE email = $1 LIMIT 1
 `
 
@@ -48,12 +57,13 @@ func (q *Queries) GetUserByEmail(ctx context.Context, email string) (User, error
 		&i.Email,
 		&i.HashedPassword,
 		&i.Name,
+		&i.IsAdmin,
 	)
 	return i, err
 }
 
 const getUserById = `-- name: GetUserById :one
-SELECT id, email, hashed_password, name FROM "user"
+SELECT id, email, hashed_password, name, is_admin FROM "user"
 WHERE id = $1 LIMIT 1
 `
 
@@ -65,6 +75,7 @@ func (q *Queries) GetUserById(ctx context.Context, id int32) (User, error) {
 		&i.Email,
 		&i.HashedPassword,
 		&i.Name,
+		&i.IsAdmin,
 	)
 	return i, err
 }
